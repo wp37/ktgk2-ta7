@@ -3,15 +3,13 @@ import {
   GraduationCap,
   Play,
   Phone,
-  Shield,
-  ShoppingCart,
-  CloudLightning,
   MessageCircle,
   BookOpen,
-  Leaf,
-  Store,
-  Wind,
-  PenTool
+  PenTool,
+  Car,
+  Film,
+  Gift,
+  Mic
 } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import { lessons, quizQuestions } from './data';
@@ -82,7 +80,7 @@ const App: React.FC = () => {
                 <span className="text-amber-300">& Review 3</span>
               </h1>
               <p className="text-xl text-white/90 mb-8 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
-                Hệ thống ôn tập toàn diện: Bảo vệ Môi trường, Mua sắm, Thiên tai. Ngữ pháp: Mệnh đề thời gian, Trạng từ tần suất & Quá khứ tiếp diễn.
+                Hệ thống ôn tập toàn diện: Giao thông, Phim ảnh, Lễ hội. Ngữ pháp: It chỉ khoảng cách, Should/Shouldn't, Mặc dù/Tuy nhiên & Câu hỏi Yes/No.
               </p>
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <a
@@ -109,16 +107,16 @@ const App: React.FC = () => {
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-500 rounded-3xl blur opacity-30 animate-pulse"></div>
                 <div className="relative w-80 h-auto bg-white/10 rounded-3xl backdrop-blur-xl p-8 animate-float mx-auto border border-white/40 shadow-2xl">
                   <div className="flex justify-between items-start mb-6">
-                    <div className="text-5xl bg-gradient-to-br from-green-400 to-emerald-600 p-4 rounded-2xl shadow-lg">🌿</div>
-                    <div className="text-5xl bg-gradient-to-br from-amber-400 to-orange-500 p-4 rounded-2xl shadow-lg">🛒</div>
-                    <div className="text-5xl bg-gradient-to-br from-violet-400 to-purple-600 p-4 rounded-2xl shadow-lg">🌪️</div>
+                    <div className="text-5xl bg-gradient-to-br from-blue-400 to-cyan-600 p-4 rounded-2xl shadow-lg">🚗</div>
+                    <div className="text-5xl bg-gradient-to-br from-rose-400 to-pink-500 p-4 rounded-2xl shadow-lg">🎬</div>
+                    <div className="text-5xl bg-gradient-to-br from-amber-400 to-orange-500 p-4 rounded-2xl shadow-lg">🏮</div>
                   </div>
                   <div className="text-white font-bold text-2xl mb-4">Giữa kỳ 2</div>
                   <div className="space-y-3 text-white/90 font-medium text-sm">
-                    <div className="flex items-center p-2 bg-white/10 rounded-lg"><Leaf className="w-4 h-4 mr-3 text-yellow-300" /> Adverb Clauses of Time</div>
-                    <div className="flex items-center p-2 bg-white/10 rounded-lg"><Store className="w-4 h-4 mr-3 text-yellow-300" /> Adverbs of Frequency</div>
-                    <div className="flex items-center p-2 bg-white/10 rounded-lg"><Shield className="w-4 h-4 mr-3 text-yellow-300" /> Present Simple for Future</div>
-                    <div className="flex items-center p-2 bg-white/10 rounded-lg"><Wind className="w-4 h-4 mr-3 text-yellow-300" /> Past Continuous</div>
+                    <div className="flex items-center p-2 bg-white/10 rounded-lg"><Car className="w-4 h-4 mr-3 text-yellow-300" /> It indicating distance</div>
+                    <div className="flex items-center p-2 bg-white/10 rounded-lg"><Film className="w-4 h-4 mr-3 text-yellow-300" /> Although vs However</div>
+                    <div className="flex items-center p-2 bg-white/10 rounded-lg"><Gift className="w-4 h-4 mr-3 text-yellow-300" /> Yes/No Questions</div>
+                    <div className="flex items-center p-2 bg-white/10 rounded-lg"><Mic className="w-4 h-4 mr-3 text-yellow-300" /> Phonics & Word Stress</div>
                   </div>
                 </div>
               </div>
@@ -260,7 +258,7 @@ const App: React.FC = () => {
               Global Success 7 - Ôn tập Giữa kỳ 2
             </h4>
             <p className="text-slate-400 max-w-lg mx-auto">
-              Unit 7, 8, 9 & Review 3. Bảo vệ Môi trường, Mua sắm, Thiên tai. Ngữ pháp chuyên sâu kết hợp ngữ âm.
+              Unit 7, 8, 9 & Review 3. Giao thông, Phim ảnh, Lễ hội thế giới. Ngữ pháp chuyên sâu kết hợp ngữ âm.
             </p>
           </div>
           <div className="flex justify-center gap-6 mb-10">

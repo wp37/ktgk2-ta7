@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import {
-  Shield,
-  ShoppingCart,
-  CloudLightning,
+  Car,
+  Film,
+  Gift,
   Zap,
-  Info,
-  AlertTriangle,
   CheckCircle2,
   Mic,
-  ClipboardCheck,
+  AlertTriangle,
   RotateCcw,
   Star,
-  Leaf,
-  Store,
-  Wind
+  ClipboardCheck
 } from 'lucide-react';
 import { Lesson, VocabItem, ExerciseItem, QuizQuestion } from './types';
 
@@ -26,8 +22,8 @@ const VocabTable: React.FC<{ items: VocabItem[], colorTheme: string }> = ({ item
         <thead className={`${colorTheme} text-white`}>
           <tr>
             <th className="px-6 py-4 font-bold uppercase text-xs tracking-wider">Từ vựng (Word)</th>
-            <th className="px-6 py-4 font-bold uppercase text-xs tracking-wider">IPA & Loại từ</th>
-            <th className="px-6 py-4 font-bold uppercase text-xs tracking-wider">Phân tích & Ngữ cảnh</th>
+            <th className="px-6 py-4 font-bold uppercase text-xs tracking-wider">Phiên âm & Loại từ</th>
+            <th className="px-6 py-4 font-bold uppercase text-xs tracking-wider">Nghĩa tiếng Việt dễ hiểu</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-100">
@@ -80,7 +76,7 @@ const GrammarBox: React.FC<{
               </div>
             )}
             {ex.explain && (
-              <p className="text-sm text-gray-500 italic ml-8 mt-1 border-t border-dashed border-gray-200 pt-1">💡 {ex.explain}</p>
+              <p className="text-sm text-gray-600 ml-8 mt-1 border-t border-dashed border-gray-200 pt-1">💡 <strong>Mẹo:</strong> {ex.explain}</p>
             )}
           </div>
         ))}
@@ -111,7 +107,7 @@ const ExerciseCard: React.FC<{ item: ExerciseItem, idx: number }> = ({ item, idx
             <div className="mt-4 bg-green-50 p-4 rounded-lg border border-green-100 flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
               <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5 shrink-0" />
               <div>
-                <span className="text-green-800 font-bold block mb-1">Giải thích chi tiết:</span>
+                <span className="text-green-800 font-bold block mb-1">Câu trả lời dễ hiểu:</span>
                 <span className="text-green-900" dangerouslySetInnerHTML={{ __html: item.answer }}></span>
               </div>
             </div>
@@ -130,149 +126,142 @@ const PhoneticCard: React.FC<{ pair: string, words: string[], tip: string }> = (
     </div>
     <div className="flex flex-wrap gap-2 mb-4 grow content-start">
       {words.map((w, i) => (
-        <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200 hover:bg-indigo-50 hover:text-indigo-700 transition-colors cursor-default">
+        <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-base font-medium border border-gray-200 hover:bg-indigo-50 hover:text-indigo-700 transition-colors cursor-default">
           {w}
         </span>
       ))}
     </div>
-    <p className="text-sm text-gray-600 italic bg-yellow-50 p-3 rounded-lg border border-yellow-100 mt-auto">
-      <span className="font-bold text-yellow-700 not-italic">Quy tắc:</span> {tip}
+    <p className="text-gray-700 bg-yellow-50 p-3 rounded-lg border border-yellow-100 mt-auto leading-relaxed">
+      <span className="font-bold text-yellow-700">Mẹo đọc:</span> {tip}
     </p>
   </div>
 );
 
-// --- UNIT 7: ENVIRONMENTAL PROTECTION ---
+// --- UNIT 7: TRAFFIC ---
 
 const unit7Vocab: VocabItem[] = [
-  { word: "Ecosystem", ipa: "/ˈiːkəʊsɪstəm/ (n)", meaning: "<strong>Hệ sinh thái</strong>. Hệ thống các sinh vật sống và môi trường tương tác.<br/><em class='text-xs text-gray-500'>Ví dụ: protect the ecosystem.</em>" },
-  { word: "Endangered species", ipa: "/ɪnˈdeɪndʒəd ˈspiːʃiːz/ (n)", meaning: "<strong>Loài có nguy cơ tuyệt chủng</strong>. Động thực vật sắp tuyệt chủng.<br/><em class='text-xs text-gray-500'>Collocation: protect endangered species.</em>" },
-  { word: "Habitat", ipa: "/ˈhæbɪtæt/ (n)", meaning: "<strong>Môi trường sống</strong>. Nơi sinh sống tự nhiên của động thực vật.<br/><em class='text-xs text-gray-500'>Ví dụ: natural habitat.</em>" },
-  { word: "Extinction", ipa: "/ɪkˈstɪŋkʃn/ (n)", meaning: "<strong>Sự tuyệt chủng</strong>. Tình trạng không còn tồn tại.<br/><em class='text-xs text-gray-500'>Family: extinct (adj).</em>" },
-  { word: "Carbon dioxide", ipa: "/ˌkɑːbən daɪˈɒksaɪd/ (n)", meaning: "<strong>Khí CO₂</strong>. Khí nhà kính gây nóng lên toàn cầu.<br/><em class='text-xs text-gray-500'>Collocation: release carbon dioxide.</em>" },
-  { word: "Carbon footprint", ipa: "/ˌkɑːbən ˈfʊtprɪnt/ (n)", meaning: "<strong>Dấu chân cacbon</strong>. Lượng CO₂ thải ra từ hoạt động con người.<br/><em class='text-xs text-gray-500'>Ví dụ: reduce your carbon footprint.</em>" },
-  { word: "Toxic", ipa: "/ˈtɒksɪk/ (adj)", meaning: "<strong>Độc hại</strong>. Có chất gây hại cho sức khỏe.<br/><em class='text-xs text-gray-500'>Ví dụ: toxic substances.</em>" },
-  { word: "Single-use", ipa: "/ˌsɪŋɡl ˈjuːs/ (adj)", meaning: "<strong>Sử dụng một lần</strong>. Dùng xong bỏ đi.<br/><em class='text-xs text-gray-500'>Ví dụ: single-use plastic bags.</em>" },
-  { word: "Protect", ipa: "/prəˈtekt/ (v)", meaning: "<strong>Bảo vệ</strong>. Giữ gìn, che chở.<br/><em class='text-xs text-gray-500'>Family: protection (n), protective (adj).</em>" },
-  { word: "Participate", ipa: "/pɑːˈtɪsɪpeɪt/ (v)", meaning: "<strong>Tham gia</strong>. Góp phần vào hoạt động.<br/><em class='text-xs text-gray-500'>Collocation: participate in activities.</em>" },
-  { word: "Coral", ipa: "/ˈkɒrəl/ (n)", meaning: "<strong>San hô</strong>. Sinh vật biển tạo rạn san hô.<br/><em class='text-xs text-gray-500'>Ví dụ: coral reef.</em>" },
-  { word: "Dugong", ipa: "/ˈduːɡɒŋ/ (n)", meaning: "<strong>Bò biển (cá cúi)</strong>. Động vật biển có vú quý hiếm.<br/><em class='text-xs text-gray-500'>Ví dụ: Côn Đảo dugong conservation.</em>" },
+  { word: "Traffic jam", ipa: "/ˈtræfɪk dʒæm/ (n)", meaning: "<strong>Tắc đường, kẹt xe</strong>.<br/><em class='text-xs text-gray-500'>Đường phố đông đúc xe cộ không đi được.</em>" },
+  { word: "Distance", ipa: "/ˈdɪstəns/ (n)", meaning: "<strong>Khoảng cách</strong>.<br/><em class='text-xs text-gray-500'>Độ dài giữa 2 điểm (ví dụ: quãng đường từ nhà tới trường).</em>" },
+  { word: "Road sign", ipa: "/rəʊd saɪn/ (n)", meaning: "<strong>Biển báo giao thông</strong>.<br/><em class='text-xs text-gray-500'>Các biển báo màu xanh/đỏ/vàng trên đường.</em>" },
+  { word: "Vehicle", ipa: "/ˈviːəkl/ (n)", meaning: "<strong>Xe cộ nói chung</strong>.<br/><em class='text-xs text-gray-500'>Bao gồm ô tô, xe máy, xe đạp...</em>" },
+  { word: "Passenger", ipa: "/ˈpæsɪndʒə/ (n)", meaning: "<strong>Hành khách</strong>.<br/><em class='text-xs text-gray-500'>Người ngồi trên xe buýt, máy bay, tàu hỏa...</em>" },
+  { word: "Pedestrian", ipa: "/pəˈdestriən/ (n)", meaning: "<strong>Người đi bộ</strong>.<br/><em class='text-xs text-gray-500'>Người tham gia giao thông bằng cách đi bộ.</em>" },
+  { word: "Zebra crossing", ipa: "/ˌzebrə ˈkrɒsɪŋ/ (n)", meaning: "<strong>Vạch kẻ sang đường</strong>.<br/><em class='text-xs text-gray-500'>Vạch trắng đen trên đường cho người đi bộ.</em>" },
+  { word: "Pavement", ipa: "/ˈpeɪvmənt/ (n)", meaning: "<strong>Vỉa hè</strong>.<br/><em class='text-xs text-gray-500'>Phần lề đường dành riêng cho người đi bộ.</em>" },
+  { word: "Fine", ipa: "/faɪn/ (v, n)", meaning: "<strong>Phạt tiền / Tiền phạt</strong>.<br/><em class='text-xs text-gray-500'>Ví dụ: Cảnh sát phạt vì không đội mũ bảo hiểm.</em>" },
+  { word: "Obey", ipa: "/əˈbeɪ/ (v)", meaning: "<strong>Tuân thủ, vâng lời</strong>.<br/><em class='text-xs text-gray-500'>Ví dụ: Obey traffic rules (tuân thủ luật giao thông).</em>" },
+  { word: "No cycling", ipa: "/nəʊ ˈsaɪklɪŋ/ (phrase)", meaning: "<strong>Biển cấm đi xe đạp</strong>.<br/><em class='text-xs text-gray-500'>Biển báo có hình xe đạp bị gạch chéo.</em>" },
+  { word: "School ahead", ipa: "/skuːl əˈhed/ (phrase)", meaning: "<strong>Phía trước có trường học</strong>.<br/><em class='text-xs text-gray-500'>Biển báo chú ý chạy chậm vì có học sinh.</em>" },
 ];
 
 const unit7Exercises: ExerciseItem[] = [
-  { id: 1, question: "The roads were slippery _______ it rained.<br/>A. when B. until C. as soon as D. while", answer: "<strong>A. when</strong>.<br/>(When + quá khứ đơn: diễn tả thời điểm xảy ra sự việc)." },
-  { id: 2, question: "_______ they arrive, we'll have lunch.", answer: "<strong>As soon as</strong>.<br/>(As soon as = ngay khi. Mệnh đề chính ở tương lai, mệnh đề phụ dùng hiện tại đơn)." },
-  { id: 3, question: "We should stop using single-use products _______ we can protect the environment.", answer: "<strong>so that</strong>.<br/>(So that + mệnh đề chỉ mục đích)." },
-  { id: 4, question: "Phonetics: Choose the word with /bl/ sound:<br/>A. <strong>Cl</strong>ean B. <strong>Bl</strong>ack C. <strong>Cl</strong>ub D. <strong>Cl</strong>ear", answer: "<strong>B. Black</strong>. Các từ còn lại chứa âm /kl/." },
+  { id: 1, question: "______ is it from your house to the school?<br/>A. How far B. How long C. How often", answer: "<strong>A. How far</strong>.<br/>Dùng <em>How far</em> để hỏi về khoảng cách (bao xa)." },
+  { id: 2, question: "You ______ ride your bike too fast. It's dangerous.<br/>A. should B. shouldn't C. must", answer: "<strong>B. shouldn't</strong>.<br/>Nghĩa là 'không nên'. Vì đạp xe nhanh rất nguy hiểm nên ta khuyên 'không nên'." },
+  { id: 3, question: "Find the word with the different sound:<br/>A. f<u>i</u>ne B. s<u>i</u>gn C. <u>i</u>t", answer: "<strong>C. it</strong>.<br/>Từ 'it' phát âm là chữ 'i' ngắn /ɪ/. Còn 'fine' và 'sign' đều đọc âm /aɪ/ (gần giống chữ 'ai')." },
+  { id: 4, question: "Walk across the street at the ______ .<br/>A. zebra crossing B. seatbelt C. fine", answer: "<strong>A. zebra crossing</strong>.<br/>Nghĩa: Đi sang đường ở chỗ 'vạch kẻ người đi bộ' (zebra crossing)." },
 ];
 
-// --- UNIT 8: SHOPPING ---
+// --- UNIT 8: FILMS ---
 
 const unit8Vocab: VocabItem[] = [
-  { word: "Bargain", ipa: "/ˈbɑːɡən/ (v)", meaning: "<strong>Mặc cả</strong>. Thương lượng giá khi mua hàng.<br/><em class='text-xs text-gray-500'>Ví dụ: bargain at the market.</em>" },
-  { word: "Customer", ipa: "/ˈkʌstəmə/ (n)", meaning: "<strong>Khách hàng</strong>. Người mua hàng hoặc dịch vụ.<br/><em class='text-xs text-gray-500'>Collocation: loyal customer.</em>" },
-  { word: "Shopaholic", ipa: "/ˌʃɒpəˈhɒlɪk/ (n)", meaning: "<strong>Người nghiện mua sắm</strong>. Người thích mua sắm quá mức.<br/><em class='text-xs text-gray-500'>Family: -aholic = nghiện cái gì.</em>" },
-  { word: "Advertisement", ipa: "/ədˈvɜːtɪsmənt/ (n)", meaning: "<strong>Quảng cáo</strong>. Thông tin giới thiệu sản phẩm.<br/><em class='text-xs text-gray-500'>Viết tắt: ad / advert.</em>" },
-  { word: "Complaint", ipa: "/kəmˈpleɪnt/ (n)", meaning: "<strong>Lời phàn nàn / khiếu nại</strong>.<br/><em class='text-xs text-gray-500'>Family: complain (v).</em>" },
-  { word: "Goods", ipa: "/ɡʊdz/ (n)", meaning: "<strong>Hàng hoá</strong>. Sản phẩm được bán.<br/><em class='text-xs text-gray-500'>Luôn ở dạng số nhiều.</em>" },
-  { word: "On sale", ipa: "/ɒn seɪl/", meaning: "<strong>Đang hạ giá</strong>. Đang được bán giảm giá.<br/><em class='text-xs text-gray-500'>Ví dụ: These shoes are on sale.</em>" },
-  { word: "Open-air market", ipa: "/ˌəʊpən ˈeə ˈmɑːkɪt/ (n)", meaning: "<strong>Chợ ngoài trời</strong>. Chợ họp ở không gian mở.<br/><em class='text-xs text-gray-500'>Đồng nghĩa: outdoor market.</em>" },
-  { word: "Price tag", ipa: "/ˈpraɪs tæɡ/ (n)", meaning: "<strong>Nhãn giá</strong>. Thẻ ghi giá sản phẩm.<br/><em class='text-xs text-gray-500'>Ví dụ: check the price tag.</em>" },
-  { word: "Shopping centre", ipa: "/ˈʃɒpɪŋ sentə/ (n)", meaning: "<strong>Trung tâm mua sắm</strong>. Tòa nhà lớn chứa nhiều cửa hàng.<br/><em class='text-xs text-gray-500'>= Shopping mall (AmE).</em>" },
-  { word: "Convenience store", ipa: "/kənˈviːniəns stɔː/ (n)", meaning: "<strong>Cửa hàng tiện lợi</strong>. Cửa hàng nhỏ mở muộn.<br/><em class='text-xs text-gray-500'>Ví dụ: 7-Eleven, Circle K.</em>" },
-  { word: "Home-made", ipa: "/ˌhəʊm ˈmeɪd/ (adj)", meaning: "<strong>Tự làm tại nhà</strong>. Không phải hàng công nghiệp.<br/><em class='text-xs text-gray-500'>Ví dụ: home-made cake.</em>" },
+  { word: "Comedy", ipa: "/ˈkɒmədi/ (n)", meaning: "<strong>Phim hài</strong>.<br/><em class='text-xs text-gray-500'>Phim rất buồn cười, giúp bạn cười nhiều.</em>" },
+  { word: "Documentary", ipa: "/ˌdɒkjuˈmentri/ (n)", meaning: "<strong>Phim tài liệu</strong>.<br/><em class='text-xs text-gray-500'>Phim về thế giới thực: động vật, lịch sử, con người.</em>" },
+  { word: "Horror film", ipa: "/ˈhɒrə fɪlm/ (n)", meaning: "<strong>Phim kinh dị</strong>.<br/><em class='text-xs text-gray-500'>Phim có ma, quái vật, làm bạn sợ hãi.</em>" },
+  { word: "Science fiction", ipa: "/ˌsaɪəns ˈfɪkʃn/ (n)", meaning: "<strong>Phim khoa học viễn tưởng</strong>.<br/><em class='text-xs text-gray-500'>Phim về robot, du hành vũ trụ. (Thường viết tắt: Sci-fi).</em>" },
+  { word: "Fantasy", ipa: "/ˈfæntəsi/ (n)", meaning: "<strong>Phim giả tưởng</strong>.<br/><em class='text-xs text-gray-500'>Phim có phép thuật, phù thuỷ, thế giới kì ảo.</em>" },
+  { word: "Frightening", ipa: "/ˈfraɪtnɪŋ/ (adj)", meaning: "<strong>Đáng sợ (làm rùng rợn)</strong>.<br/><em class='text-xs text-gray-500'>Giống như 'scary'. Dùng để tả phim kinh dị.</em>" },
+  { word: "Moving", ipa: "/ˈmuːvɪŋ/ (adj)", meaning: "<strong>Cảm động</strong>.<br/><em class='text-xs text-gray-500'>Phim làm bạn muốn khóc vì thương cảm.</em>" },
+  { word: "Gripping", ipa: "/ˈɡrɪpɪŋ/ (adj)", meaning: "<strong>Rất hấp dẫn, lôi cuốn</strong>.<br/><em class='text-xs text-gray-500'>Phim hay đến mức bạn không thể rời mắt.</em>" },
+  { word: "Confusing", ipa: "/kənˈfjuːzɪŋ/ (adj)", meaning: "<strong>Đáng bối rối, khó hiểu</strong>.<br/><em class='text-xs text-gray-500'>Phim mà xem xong bạn chẳng hiểu gì cả.</em>" },
+  { word: "Dull", ipa: "/dʌl/ (adj)", meaning: "<strong>Buồn tẻ, chán ngắt</strong>.<br/><em class='text-xs text-gray-500'>Giống như 'boring', khiến bạn buồn ngủ.</em>" },
+  { word: "Review", ipa: "/rɪˈvjuː/ (n)", meaning: "<strong>Bài đánh giá (review)</strong>.<br/><em class='text-xs text-gray-500'>Bài nhận xét xem phim có hay hay không.</em>" },
+  { word: "Star", ipa: "/stɑː/ (v, n)", meaning: "<strong>Đóng vai chính / Ngôi sao điện ảnh</strong>.<br/><em class='text-xs text-gray-500'>Ví dụ: Phim này có Tom Cruise đóng chính.</em>" },
 ];
 
 const unit8Exercises: ExerciseItem[] = [
-  { id: 1, question: "My mother _______ shops at the supermarket. She goes there every weekend.", answer: "<strong>always / often</strong>.<br/>(Trạng từ tần suất: always = luôn luôn, often = thường xuyên, đứng trước động từ thường)." },
-  { id: 2, question: "The train _______ (leave) at 4:30, so we still have time.<br/>(Chia động từ)", answer: "<strong>leaves</strong>.<br/>(Thì hiện tại đơn mang ý nghĩa tương lai: dùng cho lịch trình/thời gian biểu cố định)." },
-  { id: 3, question: "She _______ buys things online. She prefers going to the shop.<br/>A. always B. often C. rarely D. sometimes", answer: "<strong>C. rarely</strong>.<br/>(Rarely = hiếm khi. Phù hợp vì cô ấy thích đi cửa hàng hơn)." },
-  { id: 4, question: "Phonetics: Choose the word with /sp/ sound:<br/>A. <strong>St</strong>all B. <strong>Sp</strong>end C. <strong>St</strong>aff D. <strong>St</strong>ore", answer: "<strong>B. Spend</strong>. Các từ còn lại chứa âm /st/." },
+  { id: 1, question: "______ he is young, he acts very well.<br/>A. However B. Although C. But", answer: "<strong>B. Although</strong>.<br/>Cấu trúc: Although + Mệnh đề 1, Mệnh đề 2. Nghĩa: <em>Mặc dù</em> cậu bé rât trẻ, <em>nhưng</em> diễn xuất rất giỏi. (Lưu ý: Đã dùng Although thì không có But)." },
+  { id: 2, question: "The film was very sad. ______, she didn't cry.<br/>A. Although B. However C. So", answer: "<strong>B. However</strong>.<br/>However đứng đầu câu thứ hai, sau dấu chấm, và có dấu phẩy đi sau. Nghĩa: Bộ phim rất buồn. <em>Tuy nhiên</em>, cô ấy không khóc." },
+  { id: 3, question: "I didn't like the film. It was very ______.<br/>A. gripping B. moving C. dull", answer: "<strong>C. dull</strong>.<br/>Tôi không thích phim đó. Vì nó rất <em>tẻ nhạt, chán ngắt (dull)</em>." },
+  { id: 4, question: "Find the word with the different sound:<br/>A. h<u>ea</u>r B. cl<u>ea</u>r C. b<u>ea</u>r", answer: "<strong>C. bear</strong>.<br/>Từ 'bear' đọc là /eə/ (như chữ e-ờ). Còn 'hear' và 'clear' đọc âm /ɪə/ (như chữ i-a)." },
 ];
 
-// --- UNIT 9: NATURAL DISASTERS ---
+// --- UNIT 9: FESTIVALS ---
 
 const unit9Vocab: VocabItem[] = [
-  { word: "Earthquake", ipa: "/ˈɜːθkweɪk/ (n)", meaning: "<strong>Trận động đất</strong>. Hiện tượng mặt đất rung lắc mạnh.<br/><em class='text-xs text-gray-500'>Collocation: a massive earthquake.</em>" },
-  { word: "Tornado", ipa: "/tɔːˈneɪdəʊ/ (n)", meaning: "<strong>Lốc xoáy</strong>. Cột gió xoáy cực mạnh.<br/><em class='text-xs text-gray-500'>Số nhiều: tornadoes.</em>" },
-  { word: "Tsunami", ipa: "/tsuːˈnɑːmi/ (n)", meaning: "<strong>Sóng thần</strong>. Sóng biển khổng lồ do động đất.<br/><em class='text-xs text-gray-500'>Từ gốc tiếng Nhật.</em>" },
-  { word: "Volcanic", ipa: "/vɒlˈkænɪk/ (adj)", meaning: "<strong>Thuộc núi lửa</strong>. Liên quan đến núi lửa.<br/><em class='text-xs text-gray-500'>Family: volcano (n), erupt (v), eruption (n).</em>" },
-  { word: "Landslide", ipa: "/ˈlændslaɪd/ (n)", meaning: "<strong>Sạt lở đất</strong>. Đất đá trượt xuống từ sườn núi.<br/><em class='text-xs text-gray-500'>Ví dụ: heavy rain caused landslides.</em>" },
-  { word: "Destroy", ipa: "/dɪˈstrɔɪ/ (v)", meaning: "<strong>Phá hủy</strong>. Làm hỏng hoàn toàn.<br/><em class='text-xs text-gray-500'>Family: destruction (n), destructive (adj).</em>" },
-  { word: "Damage", ipa: "/ˈdæmɪdʒ/ (n, v)", meaning: "<strong>Thiệt hại / gây tổn hại</strong>.<br/><em class='text-xs text-gray-500'>Collocation: cause serious damage.</em>" },
-  { word: "Victim", ipa: "/ˈvɪktɪm/ (n)", meaning: "<strong>Nạn nhân</strong>. Người bị ảnh hưởng bởi thảm họa.<br/><em class='text-xs text-gray-500'>Ví dụ: flood victims.</em>" },
-  { word: "Rescue worker", ipa: "/ˈreskjuː ˈwɜːkə/ (n)", meaning: "<strong>Nhân viên cứu hộ</strong>. Người tham gia cứu nạn.<br/><em class='text-xs text-gray-500'>= rescuer.</em>" },
-  { word: "Predict", ipa: "/prɪˈdɪkt/ (v)", meaning: "<strong>Dự đoán</strong>. Nói trước điều sẽ xảy ra.<br/><em class='text-xs text-gray-500'>Family: prediction (n), predictable (adj).</em>" },
-  { word: "Emergency kit", ipa: "/ɪˈmɜːdʒənsi kɪt/ (n)", meaning: "<strong>Bộ dụng cụ khẩn cấp</strong>. Đồ dùng cần thiết khi thảm họa xảy ra.<br/><em class='text-xs text-gray-500'>Gồm: đèn pin, nước, thuốc...</em>" },
-  { word: "Warn", ipa: "/wɔːn/ (v)", meaning: "<strong>Cảnh báo</strong>. Báo trước về nguy hiểm.<br/><em class='text-xs text-gray-500'>Family: warning (n).</em>" },
+  { word: "Celebrate", ipa: "/ˈselɪbreɪt/ (v)", meaning: "<strong>Tổ chức ăn mừng, kỉ niệm</strong>.<br/><em class='text-xs text-gray-500'>Ví dụ: Chúng ta 'celebrate' Tết cùng gia đình.</em>" },
+  { word: "Feast", ipa: "/fiːst/ (n)", meaning: "<strong>Bữa tiệc thịnh soạn lớn</strong>.<br/><em class='text-xs text-gray-500'>Bữa ăn lớn có rất nhiều đồ ăn ngon.</em>" },
+  { word: "Costume", ipa: "/ˈkɒstjuːm/ (n)", meaning: "<strong>Trang phục biểu diễn/hóa trang</strong>.<br/><em class='text-xs text-gray-500'>Đồ mặc dịp Halloween hoặc lễ hội múa.</em>" },
+  { word: "Perform", ipa: "/pəˈfɔːm/ (v)", meaning: "<strong>Biểu diễn / Trình diễn</strong>.<br/><em class='text-xs text-gray-500'>Hát, múa trên sân khấu. Sinh ra danh từ Performance.</em>" },
+  { word: "Parade", ipa: "/pəˈreɪd/ (n)", meaning: "<strong>Cuộc diễu hành</strong>.<br/><em class='text-xs text-gray-500'>Mọi người đi thành hàng dài trên đường phố.</em>" },
+  { word: "Carve pumpkins", ipa: "/kɑːv ˈpʌmpkɪnz/ (phrase)", meaning: "<strong>Khắc bí ngô, tỉa bí ngô</strong>.<br/><em class='text-xs text-gray-500'>Hoạt động cực phổ biến ngày Halloween.</em>" },
+  { word: "Eat turkey", ipa: "/iːt ˈtɜːki/ (phrase)", meaning: "<strong>Ăn gà tây</strong>.<br/><em class='text-xs text-gray-500'>Món ăn truyền thống của Lễ Tạ ơn (Thanksgiving).</em>" },
+  { word: "Paint eggs", ipa: "/peɪnt eɡz/ (phrase)", meaning: "<strong>Sơn/vẽ trứng</strong>.<br/><em class='text-xs text-gray-500'>Hoạt động của trẻ con vào Lễ Phục Sinh (Easter).</em>" },
+  { word: "Lion dance", ipa: "/ˈlaɪən dɑːns/ (n)", meaning: "<strong>Múa lân</strong>.<br/><em class='text-xs text-gray-500'>Thường múa vào dịp Tết Trung Thu (Mid-Autumn).</em>" },
+  { word: "Fireworks display", ipa: "/ˈfaɪəwɜːks dɪˈspleɪ/ (n)", meaning: "<strong>Bắn/Trình diễn pháo hoa</strong>.<br/><em class='text-xs text-gray-500'>Xem pháo hoa đêm giao thừa.</em>" },
 ];
 
 const unit9Exercises: ExerciseItem[] = [
-  { id: 1, question: "When we _______ (watch) TV, we felt the earthquake.", answer: "<strong>were watching</strong>.<br/>(Quá khứ tiếp diễn cho hành động đang xảy ra, quá khứ đơn cho hành động xen vào: When + QKTD, QKĐ)." },
-  { id: 2, question: "I _______ (have) dinner at 6 p.m. yesterday.", answer: "<strong>was having</strong>.<br/>(Quá khứ tiếp diễn: diễn tả hành động đang xảy ra tại thời điểm xác định trong quá khứ)." },
-  { id: 3, question: "_______ they were sleeping, the storm hit the town.", answer: "<strong>While</strong>.<br/>(While + quá khứ tiếp diễn: trong khi đang... thì...)." },
-  { id: 4, question: "Stress Pattern: Choose the word with different stress:<br/>A. <strong>mu</strong>sical B. <strong>na</strong>tional C. am<strong>bi</strong>tious D. <strong>per</strong>sonal", answer: "<strong>C. ambitious</strong> (nhấn âm 2: am-BI-tious).<br/>Các từ khác nhấn âm 1. Quy tắc: đuôi -ous/-al thường nhấn âm 3 từ cuối." },
+  { id: 1, question: "______ they eat moon cakes at the festival last year?<br/>A. Do B. Did C. Are", answer: "<strong>B. Did</strong>.<br/>Câu hỏi (Yes/No Question) thì quá khứ đơn (vì có chữ <em>last year</em>). Ta mượn trợ động từ <em>Did</em> đưa lên đầu." },
+  { id: 2, question: "______ you watching the parade now?<br/>A. Do B. Are C. Did", answer: "<strong>B. Are</strong>.<br/>Đây là Thì Hiện tại tiếp diễn (có <em>now</em> và V-ing <em>watching</em>). Phải dùng to-be là <em>Are</em>." },
+  { id: 3, question: "Which word has stress on the FIRST syllable? (Nhấn âm 1)<br/>A. enjoy B. prepare C. turkey", answer: "<strong>C. turkey</strong>.<br/>'turkey' là danh từ 2 âm tiết, nhấn âm 1. Còn 'enjoy', 'prepare' là động từ, nhấn âm 2." },
+  { id: 4, question: "People often carve ______ at Halloween.<br/>A. eggs B. pumpkins C. cakes", answer: "<strong>B. pumpkins</strong>.<br/>carve pumpkins = khắc quả bí ngô (đặc trưng của Halloween)." },
 ];
 
 const review3Exercises: ExerciseItem[] = [
-  { id: 1, question: "We should reduce _______ products to protect the environment.<br/>A. single-use B. home-made C. on sale D. addicted", answer: "<strong>A. single-use</strong>.<br/>(Single-use products = sản phẩm dùng một lần. Unit 7)." },
-  { id: 2, question: "The _______ at the shopping centre were very happy with the discounts.<br/>A. victims B. residents C. customers D. species", answer: "<strong>C. customers</strong>.<br/>(Customers = khách hàng. Unit 8)." },
-  { id: 3, question: "The earthquake caused serious _______ to many buildings.<br/>A. habitat B. damage C. bargain D. complaint", answer: "<strong>B. damage</strong>.<br/>(Cause damage = gây thiệt hại. Unit 9)." },
-  { id: 4, question: "When the flood _______ (come), people _______ (sleep).<br/>(Chia động từ)", answer: "<strong>came / were sleeping</strong>.<br/>(Quá khứ đơn cho hành động xen vào + Quá khứ tiếp diễn cho hành động đang diễn ra)." },
-  { id: 5, question: "She _______ goes shopping online because she prefers real shops.<br/>A. always B. often C. rarely D. never", answer: "<strong>C. rarely</strong>.<br/>(Rarely = hiếm khi, phù hợp với ngữ cảnh thích cửa hàng thật)." },
-  { id: 6, question: "_______ the rain stops, we will go to the market.", answer: "<strong>As soon as / When</strong>.<br/>(Mệnh đề trạng ngữ chỉ thời gian. Mệnh đề chính: tương lai. Mệnh đề phụ: hiện tại đơn)." },
+  { id: 1, question: "The distance from my house to school is 2 km. (Viết lại câu bắt đầu bằng It)<br/>-> It is...", answer: "<strong>It is about 2 km from my house to school.</strong><br/>Mẹo: Cấu trúc <em>It is + (khoảng cách) + from (nơi A) to (nơi B).</em>" },
+  { id: 2, question: "He was very tired. However, he finished his work. (Viết lại câu dùng Although)<br/>-> Although...", answer: "<strong>Although he was very tired, he finished his work.</strong><br/>Mẹo: Nhét Although thẳng vào đầu câu, bỏ chữ However đi, nối lại bằng dấu phẩy." },
+  { id: 3, question: "Choose the word with different stress (Trọng âm khác):<br/>A. costume B. decide C. happy", answer: "<strong>B. decide</strong>.<br/>'decide' (quyết định) là động từ, nhấn âm 2 (de-CIDE). Còn 'costume', 'happy' là danh từ/tính từ nhấn âm 1." },
+  { id: 4, question: "When you ride a motorbike, you ______ wear a helmet. (đưa lời khuyên)<br/>A. shouldn't B. should C. have", answer: "<strong>B. should</strong>.<br/>Bạn 'nên' (should) đội mũ bảo hiểm để đảm bảo an toàn." },
 ];
 
 export const quizQuestions: QuizQuestion[] = [
-  // Unit 7 - Vocabulary
-  { id: 1, question: "Many _______ are in danger because of pollution.", options: ["ecosystems", "advertisements", "customers", "tornadoes"], correct: 0, explanation: "Ecosystem = hệ sinh thái.", unit: 7 },
-  { id: 2, question: "The factory releases _______ substances into the river.", options: ["home-made", "single-use", "toxic", "affordable"], correct: 2, explanation: "Toxic = độc hại.", unit: 7 },
-  { id: 3, question: "We should reduce our _______ by using less energy.", options: ["carbon footprint", "price tag", "emergency kit", "coral"], correct: 0, explanation: "Carbon footprint = dấu chân cacbon.", unit: 7 },
-  { id: 4, question: "The dugong is an _______ in Vietnam.", options: ["ecosystem", "endangered species", "extinction", "habitat"], correct: 1, explanation: "Endangered species = loài có nguy cơ tuyệt chủng.", unit: 7 },
-  { id: 5, question: "Everyone should _______ in environmental protection activities.", options: ["participate", "predict", "destroy", "bargain"], correct: 0, explanation: "Participate = tham gia.", unit: 7 },
-  // Unit 7 - Grammar
-  { id: 6, question: "I'll call you _______ I arrive at the airport.", options: ["as soon as", "until", "while", "before"], correct: 0, explanation: "As soon as = ngay khi. Mệnh đề chính tương lai, mệnh đề phụ hiện tại.", unit: 7 },
-  { id: 7, question: "_______ it started raining, we went inside.", options: ["While", "When", "Until", "As soon as"], correct: 1, explanation: "When + quá khứ đơn: khi trời bắt đầu mưa.", unit: 7 },
-  { id: 8, question: "We waited _______ the rain stopped.", options: ["when", "while", "until", "as soon as"], correct: 2, explanation: "Until = cho đến khi. Chờ cho đến khi mưa tạnh.", unit: 7 },
-  // Unit 7 - Phonetics
-  { id: 9, question: "Which word contains the /bl/ sound?", options: ["clean", "blanket", "club", "class"], correct: 1, explanation: "Blanket /ˈblæŋkɪt/ - các từ còn lại chứa /kl/.", unit: 7 },
-  { id: 10, question: "Which word contains the /kl/ sound?", options: ["block", "blast", "black", "clear"], correct: 3, explanation: "Clear /klɪə/ - các từ còn lại chứa /bl/.", unit: 7 },
-  // Unit 8 - Vocabulary
-  { id: 11, question: "She loves shopping so much. She's a real _______.", options: ["customer", "shopaholic", "resident", "victim"], correct: 1, explanation: "Shopaholic = người nghiện mua sắm.", unit: 8 },
-  { id: 12, question: "You can _______ at the open-air market to get a lower price.", options: ["complain", "bargain", "predict", "participate"], correct: 1, explanation: "Bargain = mặc cả.", unit: 8 },
-  { id: 13, question: "All _______ in the store are 50% off this week.", options: ["goods", "habitats", "species", "substances"], correct: 0, explanation: "Goods = hàng hoá.", unit: 8 },
-  { id: 14, question: "Check the _______ before you buy that shirt.", options: ["carbon footprint", "emergency kit", "price tag", "coral reef"], correct: 2, explanation: "Price tag = nhãn giá.", unit: 8 },
-  { id: 15, question: "My grandmother makes _______ cakes for the family.", options: ["single-use", "home-made", "toxic", "volcanic"], correct: 1, explanation: "Home-made = tự làm tại nhà.", unit: 8 },
-  // Unit 8 - Grammar
-  { id: 16, question: "She _______ goes to bed late. She's always in bed by 10 p.m.", options: ["always", "often", "sometimes", "never"], correct: 3, explanation: "Never = không bao giờ. Phù hợp: luôn đi ngủ trước 10h.", unit: 8 },
-  { id: 17, question: "The bus _______ at 8:15 every morning. (leave)", options: ["leaves", "is leaving", "will leave", "left"], correct: 0, explanation: "Hiện tại đơn cho lịch trình cố định.", unit: 8 },
-  { id: 18, question: "My art class _______ at 2 p.m. tomorrow. (start)", options: ["starts", "is starting", "will start", "started"], correct: 0, explanation: "Present simple for timetable/schedule.", unit: 8 },
-  // Unit 8 - Phonetics
-  { id: 19, question: "Which word contains the /sp/ sound?", options: ["stall", "staff", "special", "store"], correct: 2, explanation: "Special /ˈspeʃl/ - các từ còn lại chứa /st/.", unit: 8 },
-  { id: 20, question: "Which word contains the /st/ sound?", options: ["spend", "space", "honest", "sport"], correct: 2, explanation: "Honest /ˈɒnɪst/ - chứa âm /st/ ở cuối.", unit: 8 },
-  // Unit 9 - Vocabulary
-  { id: 21, question: "The _______ measured 7.0 on the Richter scale.", options: ["tornado", "earthquake", "tsunami", "landslide"], correct: 1, explanation: "Earthquake = động đất. Richter scale đo độ mạnh động đất.", unit: 9 },
-  { id: 22, question: "The volcano _______ violently last night.", options: ["predicted", "damaged", "erupted", "warned"], correct: 2, explanation: "Erupted = phun trào.", unit: 9 },
-  { id: 23, question: "Many _______ lost their homes after the flood.", options: ["customers", "victims", "residents", "species"], correct: 1, explanation: "Victims = nạn nhân.", unit: 9 },
-  { id: 24, question: "Scientists can _______ when a storm will come.", options: ["protect", "predict", "participate", "release"], correct: 1, explanation: "Predict = dự đoán.", unit: 9 },
-  { id: 25, question: "You should prepare an _______ for emergencies.", options: ["ecosystem", "emergency kit", "advertisement", "extinction"], correct: 1, explanation: "Emergency kit = bộ dụng cụ khẩn cấp.", unit: 9 },
-  // Unit 9 - Grammar
-  { id: 26, question: "While I _______ to school, it started to rain.", options: ["walk", "walked", "was walking", "am walking"], correct: 2, explanation: "While + quá khứ tiếp diễn: đang đi thì trời mưa.", unit: 9 },
-  { id: 27, question: "They _______ dinner when the earthquake happened.", options: ["have", "had", "were having", "are having"], correct: 2, explanation: "Quá khứ tiếp diễn: đang ăn tối thì động đất.", unit: 9 },
-  { id: 28, question: "When the alarm _______ (ring), everyone ran outside.", options: ["rang", "was ringing", "rings", "is ringing"], correct: 0, explanation: "When + quá khứ đơn cho hành động xen vào.", unit: 9 },
-  // Unit 9 - Phonetics
-  { id: 29, question: "Which word has stress on the FIRST syllable?", options: ["ambitious", "dangerous", "volcanic", "disaster"], correct: 1, explanation: "DAN-ge-rous nhấn âm 1. Quy tắc -ous: trọng âm trước 2 âm tiết.", unit: 9 },
-  { id: 30, question: "Which word has stress on the SECOND syllable?", options: ["personal", "national", "arrival", "musical"], correct: 2, explanation: "a-RRI-val nhấn âm 2. Các từ khác nhấn âm 1.", unit: 9 },
+  // Unit 7
+  { id: 1, question: "What is the meaning of 'traffic jam'?", options: ["Kẹt xe", "Vạch qua đường", "Nhà ga", "An toàn"], correct: 0, explanation: "Traffic jam có nghĩa là tắc đường, kẹt xe.", unit: 7 },
+  { id: 2, question: "______ about 300 metres from my house to the bus stop.", options: ["It is", "There is", "That is", "This is"], correct: 0, explanation: "Để nói khoảng cách, ta luôn luôn dùng 'It is' đứng đầu câu.", unit: 7 },
+  { id: 3, question: "You ______ ride your bike on the pavement. It's for walking.", options: ["should", "shouldn't", "can", "do"], correct: 1, explanation: "Shouldn't = không nên. Chúng ta không nên đi xe đạp trên vỉa hè dành cho người đi bộ.", unit: 7 },
+  { id: 4, question: "Which word has the /aɪ/ sound? (như chữ 'ai')", options: ["train", "sail", "sign", "wait"], correct: 2, explanation: "Sign (biển báo) đọc là /saɪn/ âm /aɪ/. Các chữ kia đều là âm /eɪ/.", unit: 7 },
+  { id: 5, question: "A person who is walking in the street is a ______.", options: ["passenger", "driver", "vehicle", "pedestrian"], correct: 3, explanation: "Pedestrian = người đi bộ.", unit: 7 },
+  { id: 6, question: "What does a 'cycle lane' sign mean?", options: ["Cấm xe đạp", "Làn đường cho xe đạp", "Đường cho ô tô", "Nơi đậu xe"], correct: 1, explanation: "Cycle = xe đạp, lane = làn đường. Đây là làn cho xe đạp.", unit: 7 },
+  { id: 7, question: "Choose the word with different sound:", options: ["cycle", "fine", "fly", "plane"], correct: 3, explanation: "Plane đọc là âm eɪ (pla-in). Còn cycle, fine, fly đọc là aɪ (ai).", unit: 7 },
+  { id: 8, question: "How ______ is it from here to the library? - It's 2 km.", options: ["long", "often", "far", "many"], correct: 2, explanation: "Hỏi về quãng đường (khoảng cách), ta dùng 'How far'.", unit: 7 },
+  { id: 9, question: "A ______ crossing is where people can walk across the road safely.", options: ["tiger", "zebra", "lion", "animal"], correct: 1, explanation: "Zebra crossing là vạch kẻ đường cho người đi bộ (giống sọc ngựa vằn).", unit: 7 },
+  { id: 10, question: "If you don't obey the rules, the police will ______ you.", options: ["fine", "find", "give", "take"], correct: 0, explanation: "Fine (v): Phạt tiền vì vi phạm.", unit: 7 },
+
+  // Unit 8
+  { id: 11, question: "A film that makes you laugh a lot is a ______.", options: ["horror film", "comedy", "documentary", "fantasy"], correct: 1, explanation: "Comedy = Phim hài (cười nhiều).", unit: 8 },
+  { id: 12, question: "______ the film was long, they stayed to watch to the end.", options: ["Although", "However", "Because", "So"], correct: 0, explanation: "Although + Mệnh đề: Mặc dù phim dài, nhưng họ vẫn xem hết. Không dùng However vì chưa có dấu chấm hết câu.", unit: 8 },
+  { id: 13, question: "The movie was so ______. I couldn't sleep all night.", options: ["frightening", "moving", "dull", "funny"], correct: 0, explanation: "Frightening = Đáng sợ. Sợ quá nên không ngủ được.", unit: 8 },
+  { id: 14, question: "Which word has the /eə/ sound? (như chữ 'eo/e-ờ')", options: ["near", "really", "there", "clear"], correct: 2, explanation: "There đọc là /ðeə/. Các chữ kia đều là /ɪə/.", unit: 8 },
+  { id: 15, question: "A film about life in the future, space, and robots is ______.", options: ["science fiction", "comedy", "romance", "documentary"], correct: 0, explanation: "Science fiction (khoa học viễn tưởng) nói về tương lai, vũ trụ.", unit: 8 },
+  { id: 16, question: "Tom likes acting. He wants to be a film ______ in the future.", options: ["star", "reviewer", "poster", "comedy"], correct: 0, explanation: "Film star = ngôi sao điện ảnh. (Có nhắc đến từ 'acting' - diễn xuất).", unit: 8 },
+  { id: 17, question: "The movie wasn't very good. ______, the music was fantastic.", options: ["Although", "Because", "However", "So"], correct: 2, explanation: "Câu trước phàn nàn, chấm một cái, dùng However (Tuy nhiên), theo sau là dấu phẩy để khen nhạc hay.", unit: 8 },
+  { id: 18, question: "If a film is 'gripping', it means it is ______.", options: ["very boring", "very interesting", "very sad", "very short"], correct: 1, explanation: "Gripping = lôi cuốn, cực kỳ thú vị (very interesting).", unit: 8 },
+  { id: 19, question: "She cried a lot because the film was very ______.", options: ["moving", "dull", "funny", "violent"], correct: 0, explanation: "Moving = cảm động. Phim cảm động khiến người ta khóc.", unit: 8 },
+  { id: 20, question: "Find the word with different sound:", options: ["scary", "clear", "care", "bear"], correct: 1, explanation: "Clear là âm /ɪə/ (clia), 3 từ còn lại là /eə/.", unit: 8 },
+
+  // Unit 9
+  { id: 21, question: "People usually carve ______ at Halloween.", options: ["apples", "eggs", "pumpkins", "cakes"], correct: 2, explanation: "Khắc bí ngô (carve pumpkins) là truyền thống Halloween.", unit: 9 },
+  { id: 22, question: "______ they go to the festival yesterday?", options: ["Do", "Are", "Did", "Will"], correct: 2, explanation: "Vì có chữ 'yesterday' (hôm qua) nên mượn trợ động từ quá khứ 'Did'.", unit: 9 },
+  { id: 23, question: "Which word has stress on the FIRST syllable? (Nhấn âm 1)", options: ["decide", "prepare", "enjoy", "turkey"], correct: 3, explanation: "Danh từ 'turkey' (gà tây) nhấn âm 1. Các động từ kia nhấn âm 2.", unit: 9 },
+  { id: 24, question: "During Easter, children like to paint chocolate ______.", options: ["eggs", "pumpkins", "trees", "flowers"], correct: 0, explanation: "Paint eggs: tô màu trứng (Lễ Phục sinh).", unit: 9 },
+  { id: 25, question: "At Mid-Autumn Festival, children watch ______ dances in the street.", options: ["turkey", "lion", "pumpkin", "elephant"], correct: 1, explanation: "Lion dance = Múa lân (Tết trung thu).", unit: 9 },
+  { id: 26, question: "We will cook a lot of food and have a big ______.", options: ["feast", "float", "costume", "candy"], correct: 0, explanation: "Feast = Bữa tiệc thịnh soạn rât nhiều đồ ăn.", unit: 9 },
+  { id: 27, question: "______ you ready for the party tonight?", options: ["Do", "Are", "Did", "Does"], correct: 1, explanation: "'ready' là tính từ nên ta dùng to-be 'Are'. Không dùng mượn trợ động từ Do.", unit: 9 },
+  { id: 28, question: "Which word has stress on the SECOND syllable? (Nhấn âm 2)", options: ["costume", "happy", "discuss", "clever"], correct: 2, explanation: "Động từ 'discuss' (thảo luận) nhấn âm 2. Các danh từ/tính từ kia nhấn âm 1.", unit: 9 },
+  { id: 29, question: "People wear special ______ to trick-or-treat at Halloween.", options: ["costumes", "feasts", "displays", "activities"], correct: 0, explanation: "Costumes = Trang phục hóa trang.", unit: 9 },
+  { id: 30, question: "At New Year, you can see beautiful fireworks ______ in the sky.", options: ["floats", "displays", "dances", "candy"], correct: 1, explanation: "Fireworks display = màn trình diễn pháo hoa.", unit: 9 },
+
   // Review 3
-  { id: 31, question: "_______ the storm passed, the villagers came out.", options: ["While", "Until", "After", "During"], correct: 2, explanation: "After = sau khi. Mệnh đề trạng ngữ chỉ thời gian.", unit: 0 },
-  { id: 32, question: "He was sleeping _______ the tornado hit the town.", options: ["when", "until", "as soon as", "before"], correct: 0, explanation: "When + quá khứ đơn: hành động xen vào.", unit: 0 },
-  { id: 33, question: "The shop _______ at 9 a.m. every day.", options: ["opens", "is opening", "will open", "opened"], correct: 0, explanation: "Hiện tại đơn cho lịch trình cố định.", unit: 0 },
-  { id: 34, question: "Many animals face _______ because of deforestation.", options: ["complaint", "extinction", "discount", "bargain"], correct: 1, explanation: "Extinction = sự tuyệt chủng.", unit: 0 },
-  { id: 35, question: "The _______ helped save people from the flood.", options: ["shopaholic", "customer", "rescue workers", "dugong"], correct: 2, explanation: "Rescue workers = nhân viên cứu hộ.", unit: 0 },
-  { id: 36, question: "I _______ buy things at the convenience store because it's near my house.", options: ["never", "rarely", "often", "before"], correct: 2, explanation: "Often = thường xuyên.", unit: 0 },
-  { id: 37, question: "While we _______ (play) outside, it started to rain.", options: ["play", "played", "were playing", "are playing"], correct: 2, explanation: "While + quá khứ tiếp diễn.", unit: 0 },
-  { id: 38, question: "The heavy rain caused _______ in many areas.", options: ["bargains", "landslides", "advertisements", "price tags"], correct: 1, explanation: "Landslides = sạt lở đất.", unit: 0 },
-  { id: 39, question: "We will wait here _______ the bus comes.", options: ["while", "as soon as", "until", "after"], correct: 2, explanation: "Until = cho đến khi.", unit: 0 },
-  { id: 40, question: "She _______ shops at the open-air market on Sundays.", options: ["always", "never", "rarely", "until"], correct: 0, explanation: "Always = luôn luôn.", unit: 0 },
+  { id: 31, question: "The distance between Ha Noi and Hai Phong is 100 km. -> ______ is 100 km from Ha Noi to Hai Phong.", options: ["This", "There", "It", "That"], correct: 2, explanation: "Chỉ khoảng cách luôn dùng cấu trúc 'It is...'.", unit: 0 },
+  { id: 32, question: "______ it was raining heavily, we still played football.", options: ["However", "Because", "Although", "So"], correct: 2, explanation: "Although = Mặc dù (trời mưa to nhưng vẫn đá banh).", unit: 0 },
+  { id: 33, question: "Choose the word with different stress (trọng âm):", options: ["helmet", "boring", "arrive"], correct: 2, explanation: "Động từ 'arrive' nhấn âm 2. Helmet, boring nhấn âm 1.", unit: 0 },
+  { id: 34, question: "You ______ cross the road when the light is red.", options: ["should", "shouldn't", "can", "always"], correct: 1, explanation: "Không nên băng qua đường khi đèn đỏ (shouldn't).", unit: 0 },
+  { id: 35, question: "______ they finish their homework last night?", options: ["Do", "Did", "Are", "Will"], correct: 1, explanation: "Có 'last night' -> dùng quá khứ đơn (Did).", unit: 0 },
+  { id: 36, question: "Find different sound:", options: ["time", "tonight", "favourite", "fly"], correct: 2, explanation: "Chữ 'i' trong bài 'favourite' đọc là âm /ɪ/. Còn time, tonight, fly đọc là /aɪ/.", unit: 0 },
+  { id: 37, question: "The film was very long. ______, it was very gripping.", options: ["Although", "Because", "However", "So"], correct: 2, explanation: "Phim dài chấm. Tuy nhiên (However) phẩy, nó rất lôi cuốn.", unit: 0 },
+  { id: 38, question: "In Mid-Autumn Festival, children eat ______.", options: ["moon cakes", "turkeys", "candy apples", "pumpkins"], correct: 0, explanation: "Bánh trung thu = moon cakes.", unit: 0 },
+  { id: 39, question: "Walking under the rain is not good. You ______ use an umbrella.", options: ["should", "shouldn't", "never", "can't"], correct: 0, explanation: "Đưa ra lời khuyên: 'Nên' sử dụng dù (should).", unit: 0 },
+  { id: 40, question: "A ______ is a place where people can walk across safely.", options: ["traffic jam", "zebra crossing", "vehicle", "seatbelt"], correct: 1, explanation: "Zebra crossing là vạch kẻ đường cho bộ hành.", unit: 0 },
 ];
 
 // --- LESSONS ---
@@ -280,264 +269,174 @@ export const quizQuestions: QuizQuestion[] = [
 export const lessons: Lesson[] = [
   // UNIT 7
   {
-    id: 0, title: "Unit 7: Từ vựng Bảo vệ Môi trường", unit: 7, icon: Leaf,
-    color: "from-emerald-600 to-green-600",
+    id: 0, title: "Unit 7: Từ vựng Giao thông (Traffic)", unit: 7, icon: Car,
+    color: "from-blue-600 to-cyan-500",
     content: (
       <div>
-        <div className="bg-emerald-50 p-6 rounded-2xl mb-8 border border-emerald-100">
-          <h2 className="text-2xl font-bold text-emerald-800 mb-2">Environmental Protection</h2>
-          <p className="text-emerald-700">Từ vựng về hệ sinh thái, ô nhiễm, loài có nguy cơ tuyệt chủng và các hoạt động bảo vệ môi trường.</p>
+        <div className="bg-blue-50 p-6 rounded-2xl mb-8 border border-blue-100">
+          <h2 className="text-2xl font-bold text-blue-800 mb-2">Traffic (Giao thông)</h2>
+          <p className="text-blue-700">Ghi nhớ từ vựng về các phương tiện, biển báo dễ hiểu nhất.</p>
         </div>
-        <VocabTable items={unit7Vocab} colorTheme="bg-gradient-to-r from-emerald-600 to-green-600" />
+        <VocabTable items={unit7Vocab} colorTheme="bg-gradient-to-r from-blue-600 to-cyan-500" />
       </div>
     )
   },
   {
-    id: 1, title: "Unit 7: Ngữ pháp Mệnh đề trạng ngữ chỉ thời gian", unit: 7, icon: Shield,
-    color: "from-green-500 to-teal-600",
+    id: 1, title: "Unit 7: Ngữ pháp It & Should", unit: 7, icon: Zap,
+    color: "from-cyan-500 to-teal-400",
     content: (
       <div>
-        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8">
-          <p className="text-yellow-800 font-bold">Trọng tâm: Complex Sentences with Adverb Clauses of Time</p>
-          <p className="text-yellow-700 text-sm mt-1">Từ nối: <strong>before, after, when, while, till/until, as soon as</strong></p>
-        </div>
         <GrammarBox
-          title="Câu phức với Mệnh đề trạng ngữ chỉ thời gian"
-          color="bg-teal-600"
-          rule={
-            <div className="space-y-2 text-sm md:text-base">
-              <p><strong>Cấu trúc:</strong> Main clause + time connector + dependent clause</p>
-              <div className="grid grid-cols-2 gap-2 border-b pb-2 mt-3">
-                <span className="font-semibold text-gray-600">Từ nối (Connector)</span>
-                <span className="font-semibold text-teal-600">Ý nghĩa</span>
-              </div>
-              <div className="grid grid-cols-2 gap-2"><span>when</span><span>khi</span></div>
-              <div className="grid grid-cols-2 gap-2"><span>while</span><span>trong khi (+ V-ing/QKTD)</span></div>
-              <div className="grid grid-cols-2 gap-2"><span>before</span><span>trước khi</span></div>
-              <div className="grid grid-cols-2 gap-2"><span>after</span><span>sau khi</span></div>
-              <div className="grid grid-cols-2 gap-2"><span>until / till</span><span>cho đến khi</span></div>
-              <div className="grid grid-cols-2 gap-2"><span>as soon as</span><span>ngay khi</span></div>
-            </div>
-          }
+          title="1. 'It' diễn tả khoảng cách"
+          color="bg-cyan-600"
+          rule={<p className="text-lg">Luôn dùng <strong>It is about + [Khoảng cách] + from... to...</strong> để hỏi khoảng cách bao xa.</p>}
           examples={[
-            { correct: "The roads were slippery when it rained.", explain: "Mệnh đề phụ (when it rained) bổ sung thời gian cho mệnh đề chính." },
-            { correct: "As soon as they arrive, we'll have lunch.", explain: "As soon as + hiện tại đơn, mệnh đề chính dùng tương lai." },
-            { correct: "I'll wait until you get back.", incorrect: "I'll wait until you will get back.", explain: "Sau until/when/as soon as dùng hiện tại đơn, KHÔNG dùng will." }
+            { correct: "It is about 2 km from my house to school.", explain: "Khoảng cách là 2 km." },
+          ]}
+        />
+        <GrammarBox
+          title="2. Should / Shouldn't (Nên / Không nên)"
+          color="bg-teal-600"
+          rule={<p className="text-lg">Đứng trước Động từ (nguyên mẫu) để đưa ra lời khuyên thiết thực.</p>}
+          examples={[
+            { correct: "You should wear a helmet.", explain: "Bạn nên đội nón bảo hiểm." },
+            { correct: "You shouldn't drive too fast.", explain: "Bạn không nên lái xe quá nhanh." },
           ]}
         />
         <div className="space-y-4">
+          <h3 className="font-bold text-gray-800 text-lg flex items-center gap-2 mb-4"><ClipboardCheck className="text-cyan-600" /> Bài tập áp dụng (Dễ hiểu)</h3>
           {unit7Exercises.map((ex, idx) => <ExerciseCard key={ex.id} item={ex} idx={idx} />)}
         </div>
       </div>
     )
   },
   {
-    id: 2, title: "Unit 7: Ngữ âm /bl/ & /kl/", unit: 7, icon: Mic,
-    color: "from-teal-500 to-cyan-500",
+    id: 2, title: "Unit 7: Ngữ âm /aɪ/ và /eɪ/", unit: 7, icon: Mic,
+    color: "from-teal-400 to-emerald-400",
     content: (
       <div>
-        <h2 className="text-2xl font-bold text-teal-800 mb-6">Cụm phụ âm (Consonant Clusters)</h2>
+        <h2 className="text-2xl font-bold text-teal-800 mb-6">Mẹo phân biệt cách phát âm siêu dễ</h2>
         <div className="grid md:grid-cols-2 gap-6">
-          <PhoneticCard pair="/bl/" words={["block", "blast", "blanket", "black", "problem"]} tip="Âm /b/ kết hợp /l/. Môi đóng rồi mở nhanh, lưỡi chạm vòm miệng." />
-          <PhoneticCard pair="/kl/" words={["clean", "clown", "club", "class", "clear"]} tip="Âm /k/ kết hợp /l/. Lưỡi gần vòm miệng rồi hạ xuống hai bên." />
-        </div>
-        <div className="mt-8 bg-cyan-50 p-6 rounded-xl border border-cyan-100 text-center">
-          <p className="font-bold text-cyan-900 text-lg mb-2">Tongue Twister (Xoắn lưỡi)</p>
-          <p className="text-xl font-medium text-cyan-600 italic">"Look! There are <strong className="text-cyan-800">bl</strong>ack <strong className="text-cyan-800">cl</strong>ouds all over!"</p>
+          <PhoneticCard pair="/aɪ/" words={["cycle", "fly", "fine", "sign", "bike"]} tip="Nghe giống vần 'ai' trong tiếng Việt. Ví dụ: F-ai-n (fine)." />
+          <PhoneticCard pair="/eɪ/" words={["sail", "train", "plane", "wait", "pavement"]} tip="Nghe giống vần 'ây' nhưng hơi kéo dài chữ e. Ví dụ: Pl-ây-n (plane)." />
         </div>
       </div>
     )
   },
+
   // UNIT 8
   {
-    id: 3, title: "Unit 8: Từ vựng Mua sắm", unit: 8, icon: ShoppingCart,
-    color: "from-amber-500 to-orange-500",
+    id: 3, title: "Unit 8: Từ vựng Phim ảnh (Films)", unit: 8, icon: Film,
+    color: "from-rose-500 to-pink-500",
     content: (
       <div>
-        <div className="bg-amber-50 p-6 rounded-2xl mb-8 border border-amber-100">
-          <h2 className="text-2xl font-bold text-amber-800 mb-2">Shopping</h2>
-          <p className="text-amber-700">Từ vựng về mua sắm, các loại cửa hàng, chợ ngoài trời, mua sắm trực tuyến và khiếu nại.</p>
+        <div className="bg-rose-50 p-6 rounded-2xl mb-8 border border-rose-100">
+          <h2 className="text-2xl font-bold text-rose-800 mb-2">Films (Phim ảnh)</h2>
+          <p className="text-rose-700">Các loại phim và tính từ diễn tả cảm xúc rất quen thuộc.</p>
         </div>
-        <VocabTable items={unit8Vocab} colorTheme="bg-gradient-to-r from-amber-500 to-orange-500" />
+        <VocabTable items={unit8Vocab} colorTheme="bg-gradient-to-r from-rose-500 to-pink-500" />
       </div>
     )
   },
   {
-    id: 4, title: "Unit 8: Ngữ pháp Trạng từ tần suất & HTĐ chỉ tương lai", unit: 8, icon: Store,
-    color: "from-orange-500 to-red-500",
+    id: 4, title: "Unit 8: Ngữ pháp Although & However", unit: 8, icon: Star,
+    color: "from-pink-500 to-fuchsia-500",
     content: (
       <div>
-        <div className="bg-orange-50 border-l-4 border-orange-400 p-4 mb-8">
-          <p className="text-orange-800 font-bold">2 chủ điểm: Adverbs of Frequency & Present Simple for Future</p>
-        </div>
         <GrammarBox
-          title="1. Trạng từ chỉ tần suất (Adverbs of Frequency)"
-          color="bg-orange-600"
-          rule={
-            <div className="text-sm md:text-base">
-              <p className="mb-3">Dùng để diễn tả mức độ thường xuyên. <strong>Vị trí:</strong> Trước động từ thường, sau động từ to be.</p>
-              <div className="flex flex-wrap gap-2">
-                {["always (100%)", "usually (80%)", "often (60%)", "sometimes (40%)", "rarely (10%)", "never (0%)"].map(w => (
-                  <span key={w} className="px-3 py-1 bg-white rounded-full text-sm border border-gray-200 font-medium">{w}</span>
-                ))}
-              </div>
-            </div>
-          }
+          title="Mẹo phân biệt Although vs However (Rất quan trọng)"
+          color="bg-rose-600"
+          rule={<p className="text-lg">Hai từ này đều mang nghĩa trái ngược, nhưng cách dùng dấu câu khác hẳn nhau.</p>}
           examples={[
-            { correct: "She always shops at the supermarket.", explain: "Always đứng trước động từ thường 'shops'." },
-            { correct: "He is never late for class.", explain: "Never đứng sau động từ to be 'is'." },
-          ]}
-        />
-        <GrammarBox
-          title="2. Hiện tại đơn mang ý nghĩa tương lai"
-          color="bg-red-600"
-          rule={
-            <div className="text-sm md:text-base">
-              <p>Dùng thì <strong>hiện tại đơn</strong> để nói về <strong>lịch trình / thời gian biểu</strong> (timetables, schedules) đã cố định.</p>
-            </div>
-          }
-          examples={[
-            { correct: "The train leaves at 4:30.", explain: "Lịch trình tàu cố định → dùng hiện tại đơn." },
-            { correct: "My art class starts at 2 p.m. tomorrow.", incorrect: "My art class will start at 2 p.m. tomorrow.", explain: "Thời gian biểu cố định: dùng HTĐ, không dùng will." },
+            { correct: "Although he is young, he plays well.", explain: "Although đứng đầu câu, kết nối 2 vế bằng dấu phẩy." },
+            { correct: "He is young. However, he plays well.", explain: "However nằm sau dấu chấm (.) và trước nó có dấu phẩy (,). Hoặc sau dấu chấm phẩy (;However,)" },
           ]}
         />
         <div className="space-y-4 mt-8">
-          <h3 className="font-bold text-gray-800 text-lg flex items-center gap-2 mb-4"><ClipboardCheck className="text-orange-600" /> Luyện tập</h3>
+          <h3 className="font-bold text-gray-800 text-lg flex items-center gap-2 mb-4"><ClipboardCheck className="text-pink-600" /> Vận dụng nhanh</h3>
           {unit8Exercises.map((ex, idx) => <ExerciseCard key={ex.id} item={ex} idx={idx} />)}
         </div>
       </div>
     )
   },
   {
-    id: 5, title: "Unit 8: Ngữ âm /sp/ & /st/", unit: 8, icon: Mic,
-    color: "from-red-500 to-rose-600",
+    id: 5, title: "Unit 8: Ngữ âm /ɪə/ và /eə/", unit: 8, icon: Mic,
+    color: "from-fuchsia-500 to-purple-500",
     content: (
       <div>
-        <h2 className="text-2xl font-bold text-rose-800 mb-6">Cụm phụ âm /sp/ và /st/</h2>
+        <h2 className="text-2xl font-bold text-fuchsia-800 mb-6">Mẹo phân biệt âm /ɪə/ và /eə/</h2>
         <div className="grid md:grid-cols-2 gap-6">
-          <PhoneticCard pair="/sp/" words={["spend", "speciality", "space", "respect", "clasp"]} tip="Âm /s/ kết hợp /p/. Hơi thoát qua khe hẹp rồi bật môi." />
-          <PhoneticCard pair="/st/" words={["stall", "staff", "outstand", "honest", "waste"]} tip="Âm /s/ kết hợp /t/. Lưỡi chạm chân răng trên rồi bật ra." />
-        </div>
-        <div className="mt-8 bg-rose-50 p-6 rounded-xl border border-rose-100 text-center">
-          <p className="font-bold text-rose-900 text-lg mb-2">Luyện câu</p>
-          <p className="text-xl font-medium text-rose-600 italic">"The a<strong className="text-rose-800">ss</strong>i<strong className="text-rose-800">st</strong>ant at her shop always gives us <strong className="text-rose-800">sp</strong>ecial attention."</p>
+          <PhoneticCard pair="/ɪə/" words={["clear", "near", "idea", "really", "appear"]} tip="Nghe giống chữ 'ia' trong tiếng Việt. Ví dụ: cl-ia (clear)." />
+          <PhoneticCard pair="/eə/" words={["scary", "careful", "there", "bear", "share"]} tip="Nghe giống chữ 'e-ờ' trong tiếng Việt. Đoạn cuối hơi ồ lên 1 xíu." />
         </div>
       </div>
     )
   },
+
   // UNIT 9
   {
-    id: 6, title: "Unit 9: Từ vựng Thiên tai", unit: 9, icon: CloudLightning,
-    color: "from-violet-500 to-purple-600",
+    id: 6, title: "Unit 9: Từ vựng Lễ hội (Festivals)", unit: 9, icon: Gift,
+    color: "from-amber-500 to-orange-500",
     content: (
       <div>
-        <div className="bg-violet-50 p-6 rounded-2xl mb-8 border border-violet-100">
-          <h2 className="text-2xl font-bold text-violet-800 mb-2">Natural Disasters</h2>
-          <p className="text-violet-700">Từ vựng về các loại thảm họa thiên nhiên, sự tàn phá và biện pháp phòng chống, ứng phó.</p>
+        <div className="bg-amber-50 p-6 rounded-2xl mb-8 border border-amber-100">
+          <h2 className="text-2xl font-bold text-amber-800 mb-2">Festivals (Lễ hội quanh thế giới)</h2>
+          <p className="text-amber-700">Các hoạt động và đồ ăn đặc trưng ngày lễ.</p>
         </div>
-        <VocabTable items={unit9Vocab} colorTheme="bg-gradient-to-r from-violet-500 to-purple-600" />
+        <VocabTable items={unit9Vocab} colorTheme="bg-gradient-to-r from-amber-500 to-orange-500" />
       </div>
     )
   },
   {
-    id: 7, title: "Unit 9: Ngữ pháp Quá khứ tiếp diễn", unit: 9, icon: Wind,
-    color: "from-purple-500 to-fuchsia-600",
+    id: 7, title: "Unit 9: Câu hỏi Yes/No", unit: 9, icon: Zap,
+    color: "from-orange-500 to-red-500",
     content: (
       <div>
-        <div className="bg-purple-50 border-l-4 border-purple-400 p-4 mb-8">
-          <p className="text-purple-800 font-bold">Past Continuous (Thì Quá khứ tiếp diễn)</p>
-          <p className="text-purple-700 text-sm mt-1">Cấu trúc: <strong>S + was/were + V-ing</strong></p>
-        </div>
         <GrammarBox
-          title="Thì Quá khứ tiếp diễn"
-          color="bg-purple-600"
-          rule={
-            <div className="space-y-3 text-sm md:text-base">
-              <p><strong>1.</strong> Hành động <strong>đang xảy ra</strong> tại một thời điểm xác định trong quá khứ.</p>
-              <p className="bg-white p-2 rounded border border-gray-200">Ví dụ: I <strong>was having</strong> dinner at 6 p.m. yesterday.</p>
-              <p><strong>2.</strong> Hành động <strong>đang xảy ra</strong> thì bị <strong>xen vào</strong> bởi hành động khác.</p>
-              <p className="bg-white p-2 rounded border border-gray-200">Ví dụ: When we <strong>were watching</strong> TV, we <strong>felt</strong> the earthquake.</p>
-              <div className="bg-amber-50 p-3 rounded-lg mt-3 border border-amber-200">
-                <p className="text-amber-800 text-sm"><strong>⚠️ Lưu ý:</strong> <code>While</code> + QKTD | <code>When</code> + QKĐ hoặc QKTD</p>
-              </div>
-            </div>
-          }
+          title="Yes/No Questions"
+          color="bg-orange-600"
+          rule={<p className="text-lg">Muốn đặt câu hỏi Yes/No, bạn chỉ việc đưa Trợ động từ (Do/Does/Did) hoặc Tobe (Am/Is/Are) lên CÙNG ĐẦU CÂU.</p>}
           examples={[
-            { correct: "While I was walking to school, it started to rain.", explain: "While + QKTD (đang đi), QKĐ (trời bắt đầu mưa)." },
-            { correct: "When the alarm rang, everyone was sleeping.", incorrect: "When the alarm was ringing, everyone slept.", explain: "When + QKĐ cho hành động ngắn xen vào." },
+            { correct: "Did they eat moon cakes yesterday?", explain: "Có yesterday -> dùng trợ động từ quá khứ Did." },
+            { correct: "Are you watching the parade now?", explain: "Có chữ now -> dùng to-be Are." },
           ]}
         />
         <div className="space-y-4 mt-8">
-          <h3 className="font-bold text-gray-800 text-lg flex items-center gap-2 mb-4"><ClipboardCheck className="text-purple-600" /> Luyện tập</h3>
+          <h3 className="font-bold text-gray-800 text-lg flex items-center gap-2 mb-4"><ClipboardCheck className="text-orange-600" /> Luyện tập điền từ</h3>
           {unit9Exercises.map((ex, idx) => <ExerciseCard key={ex.id} item={ex} idx={idx} />)}
         </div>
       </div>
     )
   },
   {
-    id: 8, title: "Unit 9: Trọng âm đuôi -al & -ous", unit: 9, icon: Mic,
-    color: "from-fuchsia-500 to-pink-500",
+    id: 8, title: "Unit 9: Trọng âm từ 2 âm tiết", unit: 9, icon: Mic,
+    color: "from-red-500 to-rose-600",
     content: (
       <div>
-        <h2 className="text-2xl font-bold text-fuchsia-800 mb-6">Trọng âm từ có đuôi -al và -ous</h2>
-        <div className="bg-fuchsia-50 p-4 rounded-xl mb-6 text-fuchsia-800">
-          Quy tắc: Từ kết thúc bằng <strong>-al</strong> hoặc <strong>-ous</strong> thường nhấn trọng âm vào âm tiết <strong>thứ 3 từ cuối</strong> lên.
-        </div>
-        <div className="grid md:grid-cols-2 gap-6">
-          <PhoneticCard pair="Suffix -AL" words={["MU-si-cal", "NA-tio-nal", "PER-so-nal", "TY-pi-cal", "a-RRI-val"]} tip="Nhấn âm tiết thứ 3 từ cuối. Ngoại lệ: arrival nhấn âm 2." />
-          <PhoneticCard pair="Suffix -OUS" words={["DAN-ge-rous", "HU-mo-rous", "POI-so-nous", "NU-me-rous", "am-BI-tious"]} tip="Nhấn âm tiết thứ 3 từ cuối. Ngoại lệ: ambitious nhấn âm 2." />
+        <h2 className="text-2xl font-bold text-red-800 mb-6">Mẹo nhớ Dễ Ẹc về Trọng âm</h2>
+        <div className="bg-red-50 p-6 rounded-xl border border-red-100 mb-6">
+          <ul className="space-y-3 text-lg text-red-900">
+            <li>✅ <strong>Danh từ & Tính từ:</strong> Thường nhấn vào âm số <strong>1</strong>. (Ví dụ: 'turkey, 'happy, 'costume).</li>
+            <li>✅ <strong>Động từ:</strong> Thường nhấn vào âm số <strong>2</strong>. (Ví dụ: en'joy, de'cide, dis'cuss).</li>
+          </ul>
         </div>
       </div>
     )
   },
+
   // REVIEW 3
   {
-    id: 9, title: "Review 3: Ôn tập từ vựng tổng hợp", unit: 0, icon: RotateCcw,
-    color: "from-sky-500 to-blue-600",
+    id: 9, title: "Review 3: Ôn tập tổng hợp", unit: 0, icon: RotateCcw,
+    color: "from-violet-500 to-purple-600",
     content: (
       <div>
-        <div className="bg-sky-50 p-6 rounded-2xl mb-8 border border-sky-100">
-          <h2 className="text-2xl font-bold text-sky-800 mb-2">🔄 Review 3: Tổng hợp Unit 7-9</h2>
-          <p className="text-sky-700">Ôn tập tổng hợp từ vựng, ngữ pháp, và ngữ âm từ cả 3 unit.</p>
+        <div className="bg-violet-50 p-6 rounded-2xl mb-8 border border-violet-100">
+          <h2 className="text-2xl font-bold text-violet-800 mb-2">🔄 Review 3 (Lấy trọn điểm thi)</h2>
+          <p className="text-violet-700">Các dạng bài tập thực tế thường xuất hiện trong đề thi 45 phút.</p>
         </div>
         <div className="space-y-4">
           {review3Exercises.map((ex, idx) => <ExerciseCard key={ex.id} item={ex} idx={idx} />)}
         </div>
-      </div>
-    )
-  },
-  {
-    id: 10, title: "Review 3: Ngữ pháp tổng hợp", unit: 0, icon: Star,
-    color: "from-blue-500 to-indigo-600",
-    content: (
-      <div>
-        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-8">
-          <p className="text-blue-800 font-bold">Tổng hợp: Adverb Clauses of Time + Adverbs of Frequency + Past Continuous</p>
-        </div>
-        <GrammarBox
-          title="1. Mệnh đề trạng ngữ chỉ thời gian"
-          color="bg-teal-600"
-          rule={<p>Từ nối: <strong>when, while, before, after, until, as soon as</strong>. Mệnh đề phụ dùng hiện tại đơn khi mệnh đề chính ở tương lai.</p>}
-          examples={[{ correct: "As soon as the storm passes, we'll go outside.", explain: "As soon as + HTĐ, mệnh đề chính + will." }]}
-        />
-        <GrammarBox
-          title="2. Trạng từ tần suất & HTĐ chỉ tương lai"
-          color="bg-orange-600"
-          rule={<p><strong>Adverbs of frequency</strong>: always, often, sometimes, rarely, never. <strong>HTĐ cho lịch trình</strong>: The bus leaves at 8.</p>}
-          examples={[
-            { correct: "She always goes to the market on Sundays.", explain: "Always đứng trước động từ thường." },
-            { correct: "The flight departs at 10 a.m.", explain: "HTĐ cho lịch trình cố định." },
-          ]}
-        />
-        <GrammarBox
-          title="3. Quá khứ tiếp diễn (Past Continuous)"
-          color="bg-purple-600"
-          rule={<p><strong>S + was/were + V-ing</strong>. Dùng diễn tả hành động đang xảy ra trong quá khứ, thường kết hợp với quá khứ đơn.</p>}
-          examples={[
-            { correct: "While they were playing, it started to rain.", explain: "While + QKTD, QKĐ." },
-            { correct: "When the flood came, people were sleeping.", explain: "When + QKĐ, QKTD." },
-          ]}
-        />
       </div>
     )
   }
